@@ -1,6 +1,6 @@
-# vue-ui-office-fabric
-
 > A Vue wrapper for Office Fabric UI
+
+# THIS IS UNDER HEAVY DEVELOPMENT
 
 ## Build Setup
 
