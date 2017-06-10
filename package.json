@@ -13,6 +13,8 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
+    "office-ui-fabric-js": "^1.4.0",
     "vue": "^2.3.3"
   },
   "devDependencies": {
