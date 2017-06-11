@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <h1>Menu Bar</h1>
+    <vue-ui-menu-bar :search="true" :items="menuItems"></vue-ui-menu-bar>
     <h1>Button</h1>
     <h2>Default</h2>
     <vue-ui-button @click.native="click">Button</vue-ui-button>
@@ -18,16 +20,39 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import VueUI from './';
-
-Vue.use(VueUI);
-
 export default {
   name: 'app',
   data() {
     return {
       loading: true,
+      menuItems: [
+        {
+          text: 'Menu 1',
+        },
+        {
+          text: 'Menu 2',
+          subItems: [
+            {
+              text: 'Sub Menu 1',
+            },
+            {
+              text: 'Sub Menu 2',
+            },
+          ],
+        },
+        {
+          text: 'Right Menu',
+          position: 'right',
+          subItems: [
+            {
+              text: 'Sub Menu 1',
+            },
+            {
+              text: 'Sub Menu 2',
+            },
+          ],
+        },
+      ],
     };
   },
   methods: {
