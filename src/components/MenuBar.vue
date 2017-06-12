@@ -2,42 +2,42 @@
   <div class="ms-CommandBar ms-CommandBar--navBar">
     <div class="ms-CommandBar-sideCommands" v-if="rightItems.length > 0">
       <template v-for="item in rightItems">
-        {{ item.text }}
+        <div class="ms-CommandButton ms-CommandButton--dropdown" v-if="item.subItems && item.subItems.length > 0">
+          <button class="ms-CommandButton-button">
+            <!--<span class="ms-CommandButton-icon ms-fontColor-themePrimary">
+                  <i class="ms-Icon ms-Icon--Settings"></i>
+                </span>-->
+            <span class="ms-CommandButton-label">{{item.text}}</span>
+            <span class="ms-CommandButton-dropdownIcon">
+              <i class="ms-Icon ms-Icon--ChevronDown"></i>
+            </span>
+          </button>
+          <ul :class="`ms-ContextualMenu ${hasIcons(item.subItems) ? 'ms-ContextualMenu--hasIcons' : ''}`">
+            <li class="ms-ContextualMenu-item" v-for="sub in item.subItems">
+              <a class="ms-ContextualMenu-link" tabindex="1">{{sub.text}}</a>
+              <!--<i class="ms-Icon ms-Icon--Folder"></i>-->
+            </li>
+            <!--<li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
+                <li class="ms-ContextualMenu-item">
+                  <a class="ms-ContextualMenu-link" tabindex="1">Plain Text Document</a>
+                  <i class="ms-Icon ms-Icon--Document"></i>
+                </li>
+                <li class="ms-ContextualMenu-item">
+                  <a class="ms-ContextualMenu-link" tabindex="1">A Coffee</a>
+                  <i class="ms-Icon ms-Icon--Coffee"></i>
+                </li>
+                <li class="ms-ContextualMenu-item">
+                  <a class="ms-ContextualMenu-link" tabindex="1">Picture</a>
+                  <i class="ms-Icon ms-Icon--Picture"></i>
+                </li>
+                <li class="ms-ContextualMenu-item">
+                  <a class="ms-ContextualMenu-link" tabindex="1">Money</a>
+                  <i class="ms-Icon ms-Icon--Money"></i>
+                </li>-->
+          </ul>
+        </div>
       </template>
-      <div class="ms-CommandButton ms-CommandButton--dropdown">
-        <button class="ms-CommandButton-button">
-          <span class="ms-CommandButton-icon ms-fontColor-themePrimary">
-            <i class="ms-Icon ms-Icon--Settings"></i>
-          </span>
-          <span class="ms-CommandButton-label">Show photos from</span>
-          <span class="ms-CommandButton-dropdownIcon">
-            <i class="ms-Icon ms-Icon--ChevronDown"></i>
-          </span>
-        </button>
-        <ul class="ms-ContextualMenu is-opened ms-ContextualMenu--hasIcons">
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Folder</a>
-            <i class="ms-Icon ms-Icon--Folder"></i>
-          </li>
-          <li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Plain Text Document</a>
-            <i class="ms-Icon ms-Icon--Document"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">A Coffee</a>
-            <i class="ms-Icon ms-Icon--Coffee"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Picture</a>
-            <i class="ms-Icon ms-Icon--Picture"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Money</a>
-            <i class="ms-Icon ms-Icon--Money"></i>
-          </li>
-        </ul>
-      </div>
+  
       <div class="ms-CommandButton ms-CommandButton--noLabel">
         <button class="ms-CommandButton-button">
           <span class="ms-CommandButton-icon ms-fontColor-themePrimary">
@@ -199,6 +199,11 @@ export default {
     },
     rightItems() {
       return _.filter(this.items, item => item.position === 'right');
+    },
+  },
+  methods: {
+    hasIcons(items) {
+      return _.find(items, item => item.icon);
     },
   },
 };

@@ -46,6 +46,7 @@ export default {
           subItems: [
             {
               text: 'Sub Menu 1',
+              icon: 'vue-ui-icon-home',
             },
             {
               text: 'Sub Menu 2',
