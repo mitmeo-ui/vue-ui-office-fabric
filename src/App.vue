@@ -49,9 +49,19 @@ export default {
               icon: 'vue-ui-icon-home',
             },
             {
+              divider: true,
+            },
+            {
               text: 'Sub Menu 2',
             },
+            {
+              text: 'Sub Menu 3',
+            },
           ],
+        },
+        {
+          text: 'Right Menu 2',
+          position: 'right',
         },
       ],
     };
