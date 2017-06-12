@@ -1,11 +1,20 @@
 import utils from '@/utils';
 
 export default {
-  props: [
-    'type',
-    'loading',
-    'loading-text',
-  ],
+  props: {
+    type: {
+      type: String,
+      default: 'default',
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    loadingText: {
+      type: String,
+      default: 'Loading...',
+    },
+  },
   data() {
     return {
       cssClass: 'ms-Button',
@@ -23,7 +32,7 @@ export default {
     this.checkLoading = (val) => {
       if (val) {
         this.disabled = true;
-        this.setText(this.computedLoadingText);
+        this.setText(this.loadingText);
       } else {
         this.disabled = false;
         this.setText(this.defaultText);
@@ -45,11 +54,6 @@ export default {
     },
     type(val) {
       this.checkType(val);
-    },
-  },
-  computed: {
-    computedLoadingText() {
-      return this.loadingText || 'Loading...';
     },
   },
 };

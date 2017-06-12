@@ -176,11 +176,20 @@ export default {
 
     };
   },
-  props: [
-    'items',
-    'search',
-    'icon',
-  ],
+  props: {
+    items: {
+      type: Array,
+      default: [],
+    },
+    search: {
+      type: Boolean,
+      default: true,
+    },
+    icon: {
+      type: String,
+      default: null,
+    },
+  },
   mounted() {
     this.instance$ = new fabric['CommandBar'](this.$el);
   },
