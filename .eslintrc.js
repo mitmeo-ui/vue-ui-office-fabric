@@ -42,5 +42,6 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'dot-notation': 0,
     'linebreak-style': 0,
+    'func-names': 0,
   }
 }

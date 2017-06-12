@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Menu Bar</h1>
-    <vue-ui-menu-bar :search="true" :items="menuItems"></vue-ui-menu-bar>
+    <vue-ui-menu-bar :search="menuSearch" :items="menuItems"></vue-ui-menu-bar>
     <h1>Button</h1>
     <h2>Default</h2>
     <vue-ui-button @click.native="click">Button</vue-ui-button>
@@ -20,6 +20,10 @@
 </template>
 
 <script>
+const menuClick = function (evt) {
+  alert(`You have clicked the "${evt.target.innerText}" item!`);
+};
+
 export default {
   name: 'app',
   data() {
@@ -27,16 +31,20 @@ export default {
       loading: true,
       menuItems: [
         {
-          text: 'Menu 1',
+          text: 'Click me!',
+          command: menuClick,
         },
         {
           text: 'Menu 2',
           subItems: [
             {
               text: 'Sub Menu 1',
+              icon: 'vue-ui-icon-home',
+              command: menuClick,
             },
             {
               text: 'Sub Menu 2',
+              command: menuClick,
             },
           ],
         },
@@ -47,21 +55,25 @@ export default {
             {
               text: 'Sub Menu 1',
               icon: 'vue-ui-icon-home',
+              command: menuClick,
             },
             {
               divider: true,
             },
             {
               text: 'Sub Menu 2',
+              command: menuClick,
             },
             {
               text: 'Sub Menu 3',
+              command: menuClick,
             },
           ],
         },
         {
           text: 'Right Menu 2',
           position: 'right',
+          command: menuClick,
         },
       ],
     };
@@ -72,6 +84,9 @@ export default {
     },
     click() {
       alert('You have clicked a button');
+    },
+    menuSearch(term) {
+      alert(`You have searched for "${term}"`);
     },
   },
 };

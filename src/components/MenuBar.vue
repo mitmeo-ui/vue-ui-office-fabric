@@ -1,58 +1,19 @@
 <template>
   <div class="ms-CommandBar ms-CommandBar--navBar">
-    <div class="ms-CommandBar-sideCommands" v-if="rightItems.length > 0">
-      <div class="ms-CommandButton ms-CommandButton--pivot" v-for="item in rightItems">
-        <button class="ms-CommandButton-button">
-          <!--<span class="ms-CommandButton-icon ms-fontColor-themePrimary">
-                        <i class="ms-Icon ms-Icon--Settings"></i>
-                      </span>-->
-          <span class="ms-CommandButton-label">{{item.text}}</span>
-          <span class="ms-CommandButton-dropdownIcon" v-if="hasSubMenu(item)">
-            <i class="ms-Icon ms-Icon--ChevronDown"></i>
-          </span>
-        </button>
-        <ul :class="`ms-ContextualMenu ${hasIcons(item.subItems) ? 'ms-ContextualMenu--hasIcons' : ''}`" v-if="hasSubMenu(item)">
-          <li :class="`ms-ContextualMenu-item ${sub.divider ? 'ms-ContextualMenu-item--divider' : ''}`" v-for="sub in item.subItems">
-            <template v-if="!sub.divider">
-              <a class="ms-ContextualMenu-link" tabindex="1">{{sub.text}}</a>
-              <!--<i class="ms-Icon ms-Icon--Folder"></i>-->
-            </template>
-          </li>
-          <!--<li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
-                      <li class="ms-ContextualMenu-item">
-                        <a class="ms-ContextualMenu-link" tabindex="1">Plain Text Document</a>
-                        <i class="ms-Icon ms-Icon--Document"></i>
-                      </li>
-                      <li class="ms-ContextualMenu-item">
-                        <a class="ms-ContextualMenu-link" tabindex="1">A Coffee</a>
-                        <i class="ms-Icon ms-Icon--Coffee"></i>
-                      </li>
-                      <li class="ms-ContextualMenu-item">
-                        <a class="ms-ContextualMenu-link" tabindex="1">Picture</a>
-                        <i class="ms-Icon ms-Icon--Picture"></i>
-                      </li>
-                      <li class="ms-ContextualMenu-item">
-                        <a class="ms-ContextualMenu-link" tabindex="1">Money</a>
-                        <i class="ms-Icon ms-Icon--Money"></i>
-                      </li>-->
-        </ul>
-      </div>
-      <div class="ms-CommandButton ms-CommandButton--noLabel">
-        <button class="ms-CommandButton-button">
-          <span class="ms-CommandButton-icon ms-fontColor-themePrimary">
-            <i class="ms-Icon ms-Icon--Info"></i>
-          </span>
-          <span class="ms-CommandButton-label"></span>
-        </button>
-      </div>
+    <!--Side menu-->
+    <div class="ms-CommandBar-sideCommands" ref="rightMenu">
     </div>
-    <div class="ms-CommandBar-mainArea">
-      <div class="ms-SearchBox ms-SearchBox--commandBar" v-if="search">
-        <input class="ms-SearchBox-field" type="text" value="">
+  
+    <!--Main menu-->
+    <div class="ms-CommandBar-mainArea" ref="leftMenu">
+      <!--Search box-->
+      <div class="ms-SearchBox ms-SearchBox--commandBar" v-if="search" ref="searchBox">
+        <input class="ms-SearchBox-field" type="text" v-model="searchTerm" @keyup.enter="search(searchTerm)">
         <label class="ms-SearchBox-label">
           <i class="ms-SearchBox-icon ms-Icon ms-Icon--Search"></i>
-          <span class="ms-SearchBox-text">Search photos</span>
+          <span class="ms-SearchBox-text">Press Enter to search...</span>
         </label>
+  
         <div class="ms-CommandButton ms-SearchBox-clear ms-CommandButton--noLabel">
           <button class="ms-CommandButton-button">
             <span class="ms-CommandButton-icon">
@@ -78,94 +39,50 @@
           </button>
         </div>
       </div>
-      <div class="ms-CommandButton ms-CommandButton--pivot is-active">
-        <button class="ms-CommandButton-button">
-          <span class="ms-CommandButton-label">All Photos</span>
-          <span class="ms-CommandButton-dropdownIcon">
+      <!--End Search box-->
+
+      <div :class="`ms-CommandButton ms-CommandButton--pivot ms-CommandButton--${item.position || 'left'}`" v-for="item in items">
+        <a class="ms-CommandButton-button" @click="item.command ? item.command($event) : null">
+          <span class="ms-CommandButton-icon ms-fontColor-themePrimary">
+            <i class="ms-Icon ms-Icon--GlobalNavButton"></i>
+          </span>
+          <span class="ms-CommandButton-label">{{item.text}}</span>
+          <span class="ms-CommandButton-dropdownIcon" v-if="hasSubMenu(item)">
             <i class="ms-Icon ms-Icon--ChevronDown"></i>
           </span>
-        </button>
-        <ul class="ms-ContextualMenu is-opened ms-ContextualMenu--hasIcons">
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Folder</a>
-            <i class="ms-Icon ms-Icon--Folder"></i>
-          </li>
-          <li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Plain Text Document</a>
-            <i class="ms-Icon ms-Icon--Document"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Coffee</a>
-            <i class="ms-Icon ms-Icon--Coffee"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Picture</a>
-            <i class="ms-Icon ms-Icon--Picture"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Money</a>
-            <i class="ms-Icon ms-Icon--Money"></i>
+        </a>
+        <ul :class="`ms-ContextualMenu ${hasIcons(item.subItems) ? 'ms-ContextualMenu--hasIcons' : ''}`" v-if="hasSubMenu(item)">
+          <li :class="`ms-ContextualMenu-item ${sub.divider ? 'ms-ContextualMenu-item--divider' : ''}`" v-for="sub in item.subItems">
+            <template v-if="!sub.divider">
+              <a class="ms-ContextualMenu-link" @click="sub.command ? sub.command($event) : null">{{sub.text}}</a>
+              <i class="ms-Icon ms-Icon--Money"></i>
+            </template>
           </li>
         </ul>
       </div>
-      <div class="ms-CommandButton ms-CommandButton--pivot">
-        <a class="ms-CommandButton-button">
-          <span class="ms-CommandButton-label">Albums</span>
-        </a>
-      </div>
-      <div class="ms-CommandButton ms-CommandButton--pivot">
-        <a class="ms-CommandButton-button">
-          <span class="ms-CommandButton-label">Tags</span>
-        </a>
-      </div>
-      <div class="ms-CommandButton ms-CommandButton--pivot">
-        <a class="ms-CommandButton-button">
-          <span class="ms-CommandButton-label">Places</span>
-        </a>
-      </div>
-      <div class="ms-CommandButton ms-CommandButton--pivot">
-        <a class="ms-CommandButton-button">
-          <span class="ms-CommandButton-label">People</span>
-        </a>
-      </div>
+  
+      <!--This block is required? Hey M$!-->
       <div class="ms-CommandButton ms-CommandBar-overflowButton ms-CommandButton--noLabel">
-        <button class="ms-CommandButton-button">
+        <a class="ms-CommandButton-button">
           <span class="ms-CommandButton-icon">
             <i class="ms-Icon ms-Icon--More"></i>
           </span>
           <span class="ms-CommandButton-label"></span>
-        </button>
+        </a>
         <ul class="ms-ContextualMenu is-opened">
           <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Folder</a>
-            <i class="ms-Icon ms-Icon--Folder"></i>
-          </li>
-          <li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Plain Text Document</a>
-            <i class="ms-Icon ms-Icon--Document"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">A Coffee</a>
-            <i class="ms-Icon ms-Icon--Coffee"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Picture</a>
-            <i class="ms-Icon ms-Icon--Picture"></i>
-          </li>
-          <li class="ms-ContextualMenu-item">
-            <a class="ms-ContextualMenu-link" tabindex="1">Money</a>
-            <i class="ms-Icon ms-Icon--Money"></i>
+            <a class="ms-ContextualMenu-link"></a>
+            <i class="ms-Icon"></i>
           </li>
         </ul>
       </div>
+      <!--End M$-->
     </div>
   </div>
 </template>
 
 <script>
-import Router from 'vue-router';
+// import Router from 'vue-router';
 import _ from 'lodash';
 import { fabric } from '@/';
 
@@ -173,7 +90,7 @@ export default {
   name: 'vue-ui-menu-bar',
   data() {
     return {
-
+      searchTerm: '',
     };
   },
   props: {
@@ -182,28 +99,29 @@ export default {
       default: [],
     },
     search: {
-      type: Boolean,
-      default: true,
+      type: Function,
+      default: null,
     },
     icon: {
       type: String,
       default: null,
     },
-    router: {
-      type: val => val instanceof Router,
-      default: null,
-    },
+    // router: {
+    //   type: val => val instanceof Router,
+    //   default: null,
+    // },
   },
   mounted() {
+    // Basically left and right menus have the same markup
+    // So to avoid copy+paste, we render all on left menu first
+    // Then move relevant items to the right menu
+    const rightItems = this.$refs.leftMenu.querySelectorAll('.ms-CommandButton--right');
+    const rightMenu = this.$refs.rightMenu;
+    _.forEach(rightItems, (item) => {
+      rightMenu.appendChild(item);
+    });
+    // fabric API to create the menu
     this.instance$ = new fabric['CommandBar'](this.$el);
-  },
-  computed: {
-    leftItems() {
-      return _.filter(this.items, item => !(item.position) || item.position === 'left');
-    },
-    rightItems() {
-      return _.filter(this.items, item => item.position === 'right');
-    },
   },
   methods: {
     hasIcons(items) {
@@ -211,6 +129,9 @@ export default {
     },
     hasSubMenu(item) {
       return item.subItems && item.subItems.length > 0;
+    },
+    clearSearch() {
+      this.searchTerm = '';
     },
   },
 };
