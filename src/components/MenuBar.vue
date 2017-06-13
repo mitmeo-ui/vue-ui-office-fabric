@@ -8,7 +8,7 @@
     <div class="ms-CommandBar-mainArea" ref="leftMenu">
       <!--Search box-->
       <div class="ms-SearchBox ms-SearchBox--commandBar" v-if="search" ref="searchBox">
-        <input class="ms-SearchBox-field" type="text" v-model="searchTerm" @keyup.enter="search(searchTerm)">
+        <input class="ms-SearchBox-field" type="text" v-model="searchTerm" @keyup.enter="search(searchTerm)" @blur="clearSearch">
         <label class="ms-SearchBox-label">
           <i class="ms-SearchBox-icon ms-Icon ms-Icon--Search"></i>
           <span class="ms-SearchBox-text">Press Enter to search...</span>
@@ -40,11 +40,11 @@
         </div>
       </div>
       <!--End Search box-->
-
+  
       <div :class="`ms-CommandButton ms-CommandButton--pivot ms-CommandButton--${item.position || 'left'}`" v-for="item in items">
         <a class="ms-CommandButton-button" @click="item.command ? item.command($event) : null">
-          <span class="ms-CommandButton-icon ms-fontColor-themePrimary">
-            <i class="ms-Icon ms-Icon--GlobalNavButton"></i>
+          <span class="ms-CommandButton-icon ms-fontColor-themePrimary" v-if="item.icon">
+            <i :class="$ui.getIconClass(item.icon)" aria-hidden="true"></i>
           </span>
           <span class="ms-CommandButton-label">{{item.text}}</span>
           <span class="ms-CommandButton-dropdownIcon" v-if="hasSubMenu(item)">
@@ -55,7 +55,7 @@
           <li :class="`ms-ContextualMenu-item ${sub.divider ? 'ms-ContextualMenu-item--divider' : ''}`" v-for="sub in item.subItems">
             <template v-if="!sub.divider">
               <a class="ms-ContextualMenu-link" @click="sub.command ? sub.command($event) : null">{{sub.text}}</a>
-              <i class="ms-Icon ms-Icon--Money"></i>
+              <i :class="$ui.getIconClass(sub.icon)" v-if="sub.icon"></i>
             </template>
           </li>
         </ul>
@@ -82,9 +82,7 @@
 </template>
 
 <script>
-// import Router from 'vue-router';
 import _ from 'lodash';
-import { fabric } from '@/';
 
 export default {
   name: 'vue-ui-menu-bar',
@@ -121,7 +119,7 @@ export default {
       rightMenu.appendChild(item);
     });
     // fabric API to create the menu
-    this.instance$ = new fabric['CommandBar'](this.$el);
+    this.instance$ = new this.$ui.fabric['CommandBar'](this.$el);
   },
   methods: {
     hasIcons(items) {
@@ -131,12 +129,23 @@ export default {
       return item.subItems && item.subItems.length > 0;
     },
     clearSearch() {
+      if (!this.searchTerm) return;
       this.searchTerm = '';
     },
   },
 };
 </script>
 
-<style>
-
+<style lang="scss">
+.ms-ContextualMenu {
+  .ms-ContextualMenu-item {
+    i {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      text-align: center;
+    }
+  }
+}
 </style>

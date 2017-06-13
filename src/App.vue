@@ -33,17 +33,19 @@ export default {
         {
           text: 'Click me!',
           command: menuClick,
+          icon: 'star-o',
         },
         {
           text: 'Menu 2',
           subItems: [
             {
               text: 'Sub Menu 1',
-              icon: 'vue-ui-icon-home',
+              icon: 'bar-chart',
               command: menuClick,
             },
             {
               text: 'Sub Menu 2',
+              icon: 'pie-chart',
               command: menuClick,
             },
           ],
@@ -51,10 +53,10 @@ export default {
         {
           text: 'Right Menu',
           position: 'right',
+          icon: 'save',
           subItems: [
             {
               text: 'Sub Menu 1',
-              icon: 'vue-ui-icon-home',
               command: menuClick,
             },
             {
