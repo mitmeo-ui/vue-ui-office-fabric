@@ -1,7 +1,18 @@
 <template>
   <div id="app">
     <h1>Menu Bar</h1>
-    <vue-ui-menu-bar :search="menuSearch" :items="menuItems"></vue-ui-menu-bar>
+    <vue-ui-menu-bar>
+      <vue-ui-menu-bar-side :items="sideItems">
+        <vue-ui-menu-bar-item :item="sideItems[0]"></vue-ui-menu-bar-item>
+      </vue-ui-menu-bar-side>
+      <vue-ui-menu-bar-main :search="menuSearch" :items="mainItems">
+        <template slot="after">
+          <vue-ui-menu-bar-item :item="mainItems[0]">
+            <vue-ui-menu-bar-sub-item :item="sideItems[1]"></vue-ui-menu-bar-sub-item>
+          </vue-ui-menu-bar-item>
+        </template>
+      </vue-ui-menu-bar-main>
+    </vue-ui-menu-bar>
     <h1>Button</h1>
     <h2>Default</h2>
     <vue-ui-button @click.native="click">Button</vue-ui-button>
@@ -29,7 +40,7 @@ export default {
   data() {
     return {
       loading: true,
-      menuItems: [
+      mainItems: [
         {
           text: 'Click me!',
           command: menuClick,
@@ -50,6 +61,8 @@ export default {
             },
           ],
         },
+      ],
+      sideItems: [
         {
           text: 'Right Menu',
           position: 'right',
