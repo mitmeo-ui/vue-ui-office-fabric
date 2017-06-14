@@ -2,18 +2,20 @@
   <li :class="`ms-ContextualMenu-item ${divider ? 'ms-ContextualMenu-item--divider' : ''}`">
     <template v-if="!divider">
       <a class="ms-ContextualMenu-link" @click="command ? command($event) : null" :title="toolTip || text">{{text}}</a>
-      <i :class="$ui.getIconClass(icon)" v-if="icon"></i>
+      <i :class="getIconClass(icon)" v-if="icon"></i>
     </template>
   </li>
 </template>
 
 <script>
 import MenuBarItemMixins from './mixins/menu-item';
+import UiMixins from './mixins/ui-helpers';
 
 export default {
   name: 'vui-menubar-subitem',
   mixins: [
     MenuBarItemMixins,
+    UiMixins,
   ],
   created() {
     this.$parent.$emit('subitem-added', this);
