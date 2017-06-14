@@ -3,7 +3,7 @@
     <search-box :search-placeholder="searchPlaceholder" :search="search" v-if="search"></search-box>
     <slot></slot>
     <template v-for="item in items">
-      <menu-bar-item :item="item"></menu-bar-item>
+      <menu-bar-item :text="item.text" :icon="item.icon" :command="item.command" :subItems="item.subItems"></menu-bar-item>
     </template>
     <slot name="after"></slot>
     <!--Fabric needs this to for submenu to be functional............-->
@@ -18,10 +18,6 @@ import QuirkBlock from './internals/MenuBarQuirkBlock';
 
 export default {
   name: 'vui-menubar-main',
-  data() {
-    return {
-    };
-  },
   props: {
     items: {
       type: Array,

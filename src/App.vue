@@ -3,11 +3,12 @@
     <h1>Menu Bar</h1>
     <vui-menubar>
       <vui-menubar-side :items="sideItems">
-        <vui-menubar-item :item="sideItems[0]"></vui-menubar-item>
+        <vui-menubar-item icon="home"></vui-menubar-item>
       </vui-menubar-side>
       <vui-menubar-main :search="menuSearch" :items="mainItems">
+        <vui-menubar-item text="Before"></vui-menubar-item>
         <template slot="after">
-          <vui-menubar-item :item="mainItems[0]">
+          <vui-menubar-item text="After">
             <vui-menubar-subitem :item="sideItems[1]"></vui-menubar-subitem>
           </vui-menubar-item>
         </template>
@@ -86,7 +87,7 @@ export default {
           ],
         },
         {
-          text: 'Right Menu 2',
+          icon: 'youtube',
           position: 'right',
           command: menuClick,
         },

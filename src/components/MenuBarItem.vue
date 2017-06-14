@@ -1,17 +1,17 @@
 <template>
-  <div class="ms-CommandButton ms-CommandButton--pivot" v-if="(item)">
-    <a class="ms-CommandButton-button" @click="!hasSubMenu(item) && item.command ? item.command($event) : null">
-      <span class="ms-CommandButton-icon ms-fontColor-themePrimary" v-if="item.icon">
-        <i :class="$ui.getIconClass(item.icon)" aria-hidden="true"></i>
+  <div :class="`ms-CommandButton ms-CommandButton--${text ? 'pivot' : 'noLabel'}`">
+    <a class="ms-CommandButton-button" @click="!hasSubMenu() && command ? command($event) : null">
+      <span class="ms-CommandButton-icon ms-fontColor-themePrimary" v-if="icon">
+        <i :class="$ui.getIconClass(icon)" aria-hidden="true"></i>
       </span>
-      <span class="ms-CommandButton-label">{{item.text}}</span>
-      <span class="ms-CommandButton-dropdownIcon" v-if="hasSubMenu(item)">
+      <span class="ms-CommandButton-label">{{text}}</span>
+      <span class="ms-CommandButton-dropdownIcon" v-if="hasSubMenu()">
         <i class="ms-Icon ms-Icon--ChevronDown"></i>
       </span>
     </a>
-    <ul :class="`ms-ContextualMenu ${hasIcons(item.subItems) ? 'ms-ContextualMenu--hasIcons' : ''}`" v-if="hasSubMenu(item)">
+    <ul :class="`ms-ContextualMenu ${hasSubIcon() ? 'ms-ContextualMenu--hasIcons' : ''}`" v-if="hasSubMenu()">
       <slot></slot>
-      <template v-for="sub in item.subItems">
+      <template v-for="sub in subItems">
         <sub-item :item="sub"></sub-item>
       </template>
       <slot name="after"></slot>
@@ -25,13 +25,21 @@ import SubItem from './MenuBarSubItem';
 
 export default {
   name: 'vui-menubar-item',
-  data() {
-    return {
-    };
-  },
   props: {
-    item: {
-      type: Object,
+    text: {
+      type: String,
+      default: null,
+    },
+    icon: {
+      type: String,
+      default: null,
+    },
+    command: {
+      type: Function,
+      default: null,
+    },
+    subItems: {
+      type: Array,
       default: null,
     },
   },
@@ -39,12 +47,12 @@ export default {
     SubItem,
   },
   methods: {
-    hasIcons(items) {
+    hasSubIcon() {
       // TODO: Check slots too
-      return _.find(items, item => item.icon);
+      return _.find(this.subItems, item => item.icon);
     },
-    hasSubMenu(item) {
-      return (item.subItems && item.subItems.length > 0)
+    hasSubMenu() {
+      return (this.subItems && this.subItems.length > 0)
         || (this.$slots.default && this.$slots.default.length > 0)
         || (this.$slots.after && this.$slots.default.after > 0);
     },

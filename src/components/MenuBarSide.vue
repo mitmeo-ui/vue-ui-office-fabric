@@ -2,7 +2,7 @@
   <div class="ms-CommandBar-sideCommands">
     <slot></slot>
     <template v-for="item in items">
-      <menu-bar-item :item="item"></menu-bar-item>
+      <menu-bar-item :text="item.text" :icon="item.icon" :command="item.command" :subItems="item.subItems"></menu-bar-item>
     </template>
     <slot name="after"></slot>
   </div>
@@ -13,10 +13,6 @@ import MenuBarItem from './MenuBarItem';
 
 export default {
   name: 'vui-menubar-side',
-  data() {
-    return {
-    };
-  },
   props: {
     items: {
       type: Array,

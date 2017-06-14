@@ -10,10 +10,6 @@
 <script>
 export default {
   name: 'vui-menubar-subitem',
-  data() {
-    return {
-    };
-  },
   props: {
     item: {
       type: Object,
