@@ -17,7 +17,7 @@ import MenuBarItem from './MenuBarItem';
 import QuirkBlock from './internals/MenuBarQuirkBlock';
 
 export default {
-  name: 'vue-ui-menu-bar-main',
+  name: 'vui-menubar-main',
   data() {
     return {
     };

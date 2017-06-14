@@ -24,7 +24,7 @@ import _ from 'lodash';
 import SubItem from './MenuBarSubItem';
 
 export default {
-  name: 'vue-ui-menu-bar-item',
+  name: 'vui-menubar-item',
   data() {
     return {
     };

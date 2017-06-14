@@ -12,7 +12,7 @@
 import MenuBarItem from './MenuBarItem';
 
 export default {
-  name: 'vue-ui-menu-bar-side',
+  name: 'vui-menubar-side',
   data() {
     return {
     };

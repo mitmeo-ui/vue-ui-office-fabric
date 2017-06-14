@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'vue-ui-menu-bar-sub-item',
+  name: 'vui-menubar-subitem',
   data() {
     return {
     };

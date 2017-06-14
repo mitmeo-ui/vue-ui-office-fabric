@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'vue-ui-menu-bar',
+  name: 'vui-menubar',
   data() {
     return {
     };

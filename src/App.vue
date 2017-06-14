@@ -1,31 +1,31 @@
 <template>
   <div id="app">
     <h1>Menu Bar</h1>
-    <vue-ui-menu-bar>
-      <vue-ui-menu-bar-side :items="sideItems">
-        <vue-ui-menu-bar-item :item="sideItems[0]"></vue-ui-menu-bar-item>
-      </vue-ui-menu-bar-side>
-      <vue-ui-menu-bar-main :search="menuSearch" :items="mainItems">
+    <vui-menubar>
+      <vui-menubar-side :items="sideItems">
+        <vui-menubar-item :item="sideItems[0]"></vui-menubar-item>
+      </vui-menubar-side>
+      <vui-menubar-main :search="menuSearch" :items="mainItems">
         <template slot="after">
-          <vue-ui-menu-bar-item :item="mainItems[0]">
-            <vue-ui-menu-bar-sub-item :item="sideItems[1]"></vue-ui-menu-bar-sub-item>
-          </vue-ui-menu-bar-item>
+          <vui-menubar-item :item="mainItems[0]">
+            <vui-menubar-subitem :item="sideItems[1]"></vui-menubar-subitem>
+          </vui-menubar-item>
         </template>
-      </vue-ui-menu-bar-main>
-    </vue-ui-menu-bar>
+      </vui-menubar-main>
+    </vui-menubar>
     <h1>Button</h1>
     <h2>Default</h2>
-    <vue-ui-button @click.native="click">Button</vue-ui-button>
+    <vui-button @click.native="click">Button</vui-button>
     <h2>Primary</h2>
-    <vue-ui-button type="primary" @click.native="click">Button</vue-ui-button>
+    <vui-button type="primary" @click.native="click">Button</vui-button>
     <h2>Disabled</h2>
-    <vue-ui-button disabled @click.native="click">Button</vue-ui-button>
+    <vui-button disabled @click.native="click">Button</vui-button>
     <h2>Loading</h2>
-    <vue-ui-button type="primary" :loading="loading" @click.native="click">Button</vue-ui-button>
+    <vui-button type="primary" :loading="loading" @click.native="click">Button</vui-button>
     <h3>Custom loading text</h3>
-    <vue-ui-button type="primary" :loading="loading" loading-text="Please wait..." @click.native="click">Button</vue-ui-button>
+    <vui-button type="primary" :loading="loading" loading-text="Please wait..." @click.native="click">Button</vui-button>
     <p>
-      <vue-ui-button type="primary" @click.native="toggleLoading">Loading {{loading ? 'OFF' : 'ON'}}</vue-ui-button>
+      <vui-button type="primary" @click.native="toggleLoading">Loading {{loading ? 'OFF' : 'ON'}}</vui-button>
     </p>
   </div>
 </template>

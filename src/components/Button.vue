@@ -10,7 +10,7 @@
 import ButtonMixins from './mixins/button';
 
 export default {
-  name: 'vue-ui-button',
+  name: 'vui-button',
   mixins: [ButtonMixins],
 };
 </script>
