@@ -2,10 +2,6 @@
   <div class="ms-CommandBar-mainArea">
     <search-box :search-placeholder="searchPlaceholder" :search="search" v-if="search"></search-box>
     <slot></slot>
-    <template v-for="item in items">
-      <menu-bar-item :text="item.text" :icon="item.icon" :command="item.command" :subItems="item.subItems"></menu-bar-item>
-    </template>
-    <slot name="after"></slot>
     <!--Fabric needs this to for submenu to be functional............-->
     <quirk-block></quirk-block>
   </div>
@@ -13,16 +9,11 @@
 
 <script>
 import SearchBox from './internals/MenuBarSearch';
-import MenuBarItem from './MenuBarItem';
 import QuirkBlock from './internals/MenuBarQuirkBlock';
 
 export default {
   name: 'vui-menubar-main',
   props: {
-    items: {
-      type: Array,
-      default: [],
-    },
     search: {
       type: Function,
       default: null,
@@ -34,7 +25,6 @@ export default {
   },
   components: {
     SearchBox,
-    MenuBarItem,
     QuirkBlock,
   },
 };

@@ -11,6 +11,8 @@ import ButtonMixins from './mixins/button';
 
 export default {
   name: 'vui-button',
-  mixins: [ButtonMixins],
+  mixins: [
+    ButtonMixins,
+  ],
 };
 </script>
