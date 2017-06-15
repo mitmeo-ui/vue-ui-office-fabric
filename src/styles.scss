@@ -1,3 +1,16 @@
+// Normalise icon fonts
 .fa {
   font-size: 18px;
+}
+
+.typcn {
+  font-size: 24px;
+  display: inline-block;
+  margin-top: -3px;
+}
+
+.md-icon{
+  font-family: "Material Icons";
+  font-style: normal;
+  font-size: 24px;
 }

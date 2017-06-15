@@ -2,7 +2,7 @@
   <li :class="`ms-ContextualMenu-item ${divider ? 'ms-ContextualMenu-item--divider' : ''}`">
     <template v-if="!divider">
       <a class="ms-ContextualMenu-link" @click="command ? command($event) : null" :title="toolTip || text">{{text}}</a>
-      <i :class="icon" v-if="icon"></i>
+      <i :class="iconClass" v-if="icon">{{iconText}}</i>
     </template>
   </li>
 </template>

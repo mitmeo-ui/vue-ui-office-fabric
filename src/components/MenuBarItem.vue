@@ -2,7 +2,7 @@
   <div :class="`ms-CommandButton ms-CommandButton--${text ? 'pivot' : 'noLabel'}`">
     <a class="ms-CommandButton-button" @click="!hasSubMenu && command ? command($event) : null" :title="toolTip || text">
       <span class="ms-CommandButton-icon ms-fontColor-themePrimary" v-if="icon">
-        <i :class="icon" aria-hidden="true"></i>
+        <i :class="iconClass" aria-hidden="true">{{iconText}}</i>
       </span>
       <span class="ms-CommandButton-label">{{text}}</span>
       <span class="ms-CommandButton-dropdownIcon" v-if="hasSubMenu">

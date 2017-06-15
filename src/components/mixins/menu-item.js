@@ -21,4 +21,14 @@ export default {
       default: false,
     },
   },
+  computed: {
+    iconClass() {
+      return this.icon ? this.icon.split('|')[0].trim() : null;
+    },
+    iconText() {
+      if (!this.icon) return null;
+      const segs = this.icon.split('|');
+      return (segs.length === 2) ? segs[1].trim() : null;
+    },
+  },
 };
