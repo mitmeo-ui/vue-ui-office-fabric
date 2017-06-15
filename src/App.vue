@@ -20,6 +20,7 @@
       </vui-menubar-main>
     </vui-menubar>
     <p>
+      <vui-button @click.native="useIcons('fabric')">Use Fabric</vui-button>
       <vui-button @click.native="useIcons('fa')">Use Font Awesome</vui-button>
       <vui-button @click.native="useIcons('typcn')">Use Typicons</vui-button>
       <vui-button @click.native="useIcons('mdl')">Use Materialize</vui-button>
@@ -43,52 +44,14 @@
 
 <script>
 import 'typicons.font/src/font/typicons.css';
-
-const icons = {
-  fa: [
-    'fa fa-user-o',
-    'fa fa-key',
-    'fa fa-envelope-o',
-    'fa fa-power-off',
-    'fa fa-gift',
-    'fa fa-user',
-    'fa fa-calendar',
-    'fa fa-list',
-    'fa fa-star',
-    'fa fa-circle',
-  ],
-  typcn: [
-    'typcn typcn-user-outline',
-    'typcn typcn-key',
-    'typcn typcn-mail',
-    'typcn typcn-power',
-    'typcn typcn-gift',
-    'typcn typcn-user',
-    'typcn typcn-calendar',
-    'typcn typcn-th-list',
-    'typcn typcn-star',
-    'typcn typcn-social-github-circle',
-  ],
-  mdl: [
-    'md-icon|account_box',
-    'md-icon|vpn_key',
-    'md-icon|mail_outline',
-    'md-icon|power_settings_new',
-    'md-icon|card_giftcard',
-    'md-icon|account_circle',
-    'md-icon|schedule',
-    'md-icon|view_list',
-    'md-icon|star',
-    'md-icon|check_circle',
-  ],
-};
+import icons from '@/icons';
 
 export default {
   name: 'app',
   data() {
     return {
       loading: true,
-      icons: icons.typcn,
+      icons: icons.fabric,
     };
   },
   methods: {
