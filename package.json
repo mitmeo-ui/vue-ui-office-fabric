@@ -8,12 +8,14 @@
     "last 2 versions",
     "not ie <= 8"
   ],
+  "bugs": {
+    "url": "https://github.com/mitmeo-ui/vue-ui-office-fabric/issues",
+    "email": "mitmeostudio@gmail.com"
+  },
   "dependencies": {
-    "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "office-ui-fabric-js": "^1.4.0",
-    "vue": "^2.3.3",
-    "vue-router": "^2.5.3"
+    "vue": "^2.3.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -83,10 +85,25 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "main": "src/index.js",
+  "homepage": "https://github.com/mitmeo-ui/vue-ui-office-fabric",
+  "keywords": [
+    "CSS",
+    "Components",
+    "Frameworkd",
+    "UI",
+    "Vue",
+    "VueJs"
+  ],
+  "license": "MIT",
+  "main": "packed/index.js",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mitmeo-ui/vue-ui-office-fabric"
+  },
   "scripts": {
     "build": "node build/build.js",
+    "build:packed": "node build/build.packed.js",
     "dev": "node build/dev-server.js",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
     "start": "node build/dev-server.js",

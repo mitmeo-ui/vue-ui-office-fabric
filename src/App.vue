@@ -3,19 +3,19 @@
     <h1>Menu Bar</h1>
     <vui-menubar>
       <vui-menubar-side>
-        <vui-menubar-item text="User Profile" icon="user-o" :command="buttonClick">
-          <vui-menubar-subitem icon="key" text="Reset Password" :command="buttonClick"></vui-menubar-subitem>
-          <vui-menubar-subitem icon="envelope-o" text="Confirm Email" :command="buttonClick"></vui-menubar-subitem>
+        <vui-menubar-item text="User Profile" icon="fa fa-user-o" :command="buttonClick">
+          <vui-menubar-subitem icon="fa fa-key" text="Reset Password" :command="buttonClick"></vui-menubar-subitem>
+          <vui-menubar-subitem icon="fa fa-envelope-o" text="Confirm Email" :command="buttonClick"></vui-menubar-subitem>
         </vui-menubar-item>
-        <vui-menubar-item icon="power-off" tool-tip="Sign out" :command="buttonClick"></vui-menubar-item>
+        <vui-menubar-item icon="fa fa-power-off" tool-tip="Sign out" :command="buttonClick"></vui-menubar-item>
       </vui-menubar-side>
       <vui-menubar-main :search="menuSearch">
-        <vui-menubar-item text="Gift" :command="buttonClick" icon="gift"></vui-menubar-item>
+        <vui-menubar-item text="Gift" :command="buttonClick" icon="fa fa-gift"></vui-menubar-item>
         <vui-menubar-item text="Icons">
-          <vui-menubar-subitem icon="user" text="User Profile" :command="buttonClick"></vui-menubar-subitem>
+          <vui-menubar-subitem icon="fa fa-user" text="User Profile" :command="buttonClick"></vui-menubar-subitem>
           <vui-menubar-subitem :divider="true"></vui-menubar-subitem>
-          <vui-menubar-subitem icon="calendar" text="Schedule" :command="buttonClick"></vui-menubar-subitem>
-          <vui-menubar-subitem icon="list" text="Stocks" :command="buttonClick"></vui-menubar-subitem>
+          <vui-menubar-subitem icon="fa fa-calendar" text="Schedule" :command="buttonClick"></vui-menubar-subitem>
+          <vui-menubar-subitem icon="fa fa-list" text="Stocks" :command="buttonClick"></vui-menubar-subitem>
         </vui-menubar-item>
       </vui-menubar-main>
     </vui-menubar>

@@ -5,13 +5,13 @@
 </template>
 
 <script>
-// import { fabric } from '../';
+import { fabric } from '@';
 
 export default {
   name: 'vui-menubar',
   mounted() {
     // fabric API to create the menu
-    this.instance$ = new fabric.CommandBar(this.$el);
+    this.$menubar = new fabric.CommandBar(this.$el);
   },
 };
 </script>
