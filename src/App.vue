@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import 'typicons.font/src/font/typicons.css';
 import icons from '@/icons';
 
 export default {

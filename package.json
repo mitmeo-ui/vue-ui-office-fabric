@@ -15,7 +15,6 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "office-ui-fabric-js": "^1.4.0",
-    "typicons.font": "^2.0.9",
     "vue": "^2.3.3"
   },
   "devDependencies": {
@@ -96,7 +95,7 @@
     "VueJs"
   ],
   "license": "MIT",
-  "main": "packed/index.js",
+  "main": "dist/index.js",
   "private": false,
   "repository": {
     "type": "git",
@@ -104,7 +103,8 @@
   },
   "scripts": {
     "build": "node build/build.js",
-    "build:packed": "node build/build.packed.js",
+    "build:all": "node build/build.dist.js && node build/build.js",
+    "build:dist": "node build/build.dist.js",
     "dev": "node build/dev-server.js",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
     "start": "node build/dev-server.js",

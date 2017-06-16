@@ -7,13 +7,13 @@ var webpack = require('webpack')
 var rm = require('rimraf')
 var path = require('path')
 
-var webpackConfig = require('./webpack.packed.conf')
+var webpackConfig = require('./webpack.dist.conf')
 var config = require('../config')
 
 var spinner = ora('packaging NPM module...')
 spinner.start()
 
-rm(config.build.packedRoot, err => {
+rm(config.build.distRoot, err => {
   if (err) throw err
   webpack(webpackConfig, function (err, stats) {
     spinner.stop()

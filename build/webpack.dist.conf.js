@@ -11,7 +11,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     })
   },
   output: {
-    path: config.build.packedRoot,
+    path: config.build.distRoot,
     filename: '[name].js',
     library: 'vue-ui-office-fabric',
     libraryTarget: 'umd'
