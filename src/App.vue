@@ -9,7 +9,7 @@
         </vui-menubar-item>
         <vui-menubar-item :icon="icons[3]" tool-tip="Sign out" :command="buttonClick"></vui-menubar-item>
       </vui-menubar-side>
-      <vui-menubar-main :search="menuSearch">
+      <vui-menubar-main :search="menuSearch" :icon="icons.search">
         <vui-menubar-item text="Gift" :command="buttonClick" :icon="icons[4]"></vui-menubar-item>
         <vui-menubar-item text="Icons">
           <vui-menubar-subitem :icon="icons[5]" text="User Profile" :command="buttonClick"></vui-menubar-subitem>
@@ -50,8 +50,11 @@ export default {
   data() {
     return {
       loading: true,
-      icons: icons.fabric,
+      icons: [],
     };
+  },
+  mounted() {
+    this.useIcons('fabric');
   },
   methods: {
     toggleLoading() {
@@ -65,6 +68,7 @@ export default {
     },
     useIcons(icon) {
       this.icons = icons[icon];
+      this.icons.search = icons.search[icon];
     },
   },
 };

@@ -2,7 +2,7 @@
   <div class="ms-SearchBox ms-SearchBox--commandBar">
     <input class="ms-SearchBox-field" type="text" v-model="searchTerm" @keyup.enter="search(searchTerm)" @blur="clearSearch">
     <label class="ms-SearchBox-label">
-      <i class="ms-SearchBox-icon ms-Icon ms-Icon--Search"></i>
+      <i :class="`ms-SearchBox-icon ${iconClass}`">{{iconText}}</i>
       <span class="ms-SearchBox-text">{{searchPlaceholder}}</span>
     </label>
     <div class="ms-CommandButton ms-SearchBox-clear ms-CommandButton--noLabel">
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import MenuBarItemMixins from '@/components/mixins/menu-item';
+
 export default {
   name: 'vue-ui-menu-bar-search',
   data() {
@@ -40,6 +42,9 @@ export default {
       searchTerm: '',
     };
   },
+  mixins: [
+    MenuBarItemMixins,
+  ],
   props: {
     searchPlaceholder: {
       type: String,
@@ -48,6 +53,10 @@ export default {
     search: {
       type: Function,
       default: null,
+    },
+    icon: {
+      type: String,
+      default: 'ms-Icon ms-Icon--Search',
     },
   },
   methods: {

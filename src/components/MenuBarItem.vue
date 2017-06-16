@@ -30,7 +30,7 @@ export default {
   ],
   created() {
     this.$on('subitem-added', (sub) => {
-      this.hasSubIcon = sub.icon;
+      this.$nextTick().then(() => { this.hasSubIcon = sub.icon; });
     });
   },
   computed: {

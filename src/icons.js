@@ -47,4 +47,10 @@ export default {
     'ms-Icon ms-Icon--FavoriteStar',
     'ms-Icon ms-Icon--LocationCircle',
   ],
+  search: {
+    fabric: 'ms-Icon ms-Icon--Search',
+    fa: 'fa fa-search',
+    typcn: 'typcn typcn-zoom',
+    mdl: 'md-icon|search',
+  },
 };
