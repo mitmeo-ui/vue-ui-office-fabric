@@ -20,24 +20,24 @@
       </vui-menubar-main>
     </vui-menubar>
     <p>
-      <vui-button @click.native="useIcons('fabric')">Use Fabric</vui-button>
-      <vui-button @click.native="useIcons('fa')">Use Font Awesome</vui-button>
-      <vui-button @click.native="useIcons('typcn')">Use Typicons</vui-button>
-      <vui-button @click.native="useIcons('mdl')">Use Materialize</vui-button>
+      <vui-button :command="() => {useIcons('fabric');}">Use Fabric</vui-button>
+      <vui-button :command="() => {useIcons('fa');}">Use Font Awesome</vui-button>
+      <vui-button :command="() => {useIcons('typcn');}">Use Typicons</vui-button>
+      <vui-button :command="() => {useIcons('mdl');}">Use Materialize</vui-button>
     </p>
     <h1>Button</h1>
     <h2>Default</h2>
-    <vui-button @click.native="buttonClick">Button</vui-button>
+    <vui-button :command="buttonClick">Button</vui-button>
     <h2>Primary</h2>
-    <vui-button type="primary" @click.native="buttonClick">Button</vui-button>
+    <vui-button type="primary" :command="buttonClick">Button</vui-button>
     <h2>Disabled</h2>
-    <vui-button disabled @click.native="buttonClick">Button</vui-button>
+    <vui-button disabled :command="buttonClick">Button</vui-button>
     <h2>Loading</h2>
-    <vui-button type="primary" :loading="loading" @click.native="buttonClick">Button</vui-button>
+    <vui-button type="primary" :loading="buttonLoading" :command="buttonClick">Button</vui-button>
     <h3>Custom loading text</h3>
-    <vui-button type="primary" :loading="loading" loading-text="Please wait..." @click.native="buttonClick">Button</vui-button>
+    <vui-button type="primary" :loading="buttonLoading" loading-text="Please wait..." :command="buttonClick">Button</vui-button>
     <p>
-      <vui-button type="primary" @click.native="toggleLoading">Loading {{loading ? 'OFF' : 'ON'}}</vui-button>
+      <vui-button type="primary" :command="toggleLoading">Loading {{buttonLoading ? 'OFF' : 'ON'}}</vui-button>
     </p>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
   name: 'app',
   data() {
     return {
-      loading: true,
+      buttonLoading: true,
       icons: [],
     };
   },
@@ -58,10 +58,10 @@ export default {
   },
   methods: {
     toggleLoading() {
-      this.loading = !this.loading;
+      this.buttonLoading = !this.buttonLoading;
     },
-    buttonClick() {
-      alert('You have clicked a button');
+    buttonClick(event) {
+      alert(`You have clicked ${event.target.innerText} button`);
     },
     menuSearch(term) {
       alert(`You have searched for "${term}"`);
