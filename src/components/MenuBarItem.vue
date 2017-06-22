@@ -1,11 +1,11 @@
 <template>
-  <div :class="`ms-CommandButton ms-CommandButton--${text ? 'pivot' : 'noLabel'}`">
+  <div :class="`ms-CommandButton ms-CommandButton--${text || $isPhone ? 'pivot' : 'noLabel'}`">
     <a class="ms-CommandButton-button" @click="!hasSubMenu && command ? command($event) : null" :title="toolTip || text">
       <span class="ms-CommandButton-icon ms-fontColor-themePrimary" v-if="icon">
         <i :class="iconClass" aria-hidden="true">{{iconText}}</i>
       </span>
-      <span class="ms-CommandButton-label">{{text}}</span>
-      <span class="ms-CommandButton-dropdownIcon" v-if="hasSubMenu">
+      <span class="ms-CommandButton-label" v-show="!$isPhone">{{text}}</span>
+      <span class="ms-CommandButton-dropdownIcon" v-if="hasSubMenu && !$isPhone">
         <i class="ms-Icon ms-Icon--ChevronDown"></i>
       </span>
     </a>

@@ -1,6 +1,8 @@
 import 'office-ui-fabric-js/dist/css/fabric.min.css';
 import 'office-ui-fabric-js/dist/css/fabric.components.min.css';
 
+import { UAParser } from 'ua-parser-js';
+
 import MenuBar from '@/components/MenuBar';
 import MenuBarMain from '@/components/MenuBarMain';
 import MenuBarSide from '@/components/MenuBarSide';
@@ -21,6 +23,13 @@ export default {
     vue.component(MenuBarItem.name, MenuBarItem);
     vue.component(MenuBarSubItem.name, MenuBarSubItem);
     vue.component(Button.name, Button);
+    vue.mixin({
+      created() {
+        const type = new UAParser().getDevice().type;
+        this.$isPhone = ['mobile', 'wearable', 'embedded'].indexOf(type) >= 0;
+        this.$isTablet = ['tablet'].indexOf(type) >= 0;
+      },
+    });
   },
 };
 

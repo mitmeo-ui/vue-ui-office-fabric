@@ -21,14 +21,6 @@
         <span class="ms-CommandButton-label"></span>
       </button>
     </div>
-    <div class="ms-CommandButton ms-SearchBox-filter ms-CommandButton--noLabel">
-      <button class="ms-CommandButton-button">
-        <span class="ms-CommandButton-icon">
-          <i class="ms-Icon ms-Icon--Filter"></i>
-        </span>
-        <span class="ms-CommandButton-label"></span>
-      </button>
-    </div>
   </div>
 </template>
 
@@ -67,3 +59,12 @@ export default {
   },
 };
 </script>
+
+<style>
+@media only screen and (max-width: 639px) {
+  .ms-SearchBox.ms-SearchBox--commandBar.is-collapsed.is-active .ms-SearchBox-clear {
+    display: inline-block;
+    right: 0;
+  }
+}
+</style>
