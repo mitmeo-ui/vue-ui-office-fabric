@@ -39,6 +39,14 @@
     <p>
       <vui-button type="primary" :command="toggleLoading">Loading {{buttonLoading ? 'OFF' : 'ON'}}</vui-button>
     </p>
+
+    <h1>CheckBox</h1>
+    <h2>Default</h2>
+    <vui-checkbox>Default Checkbox</vui-checkbox>
+    <h2>Checked Listener</h2>
+    <vui-checkbox :command="buttonClick">Event Listener Attached</vui-checkbox>
+    <h2>Disabled</h2>
+    <vui-checkbox disabled>Disabled Checkbox</vui-checkbox>
   </div>
 </template>
 
