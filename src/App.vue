@@ -44,7 +44,7 @@
     <h2>Default</h2>
     <vui-checkbox>Default Checkbox</vui-checkbox>
     <h2>Checked Listener</h2>
-    <vui-checkbox :command="buttonClick">Event Listener Attached</vui-checkbox>
+    <vui-checkbox v-model="checkCheckBox">Event Listener Attached {{checkCheckBox}}</vui-checkbox>
     <h2>Disabled</h2>
     <vui-checkbox disabled>Disabled Checkbox</vui-checkbox>
   </div>
@@ -59,6 +59,7 @@ export default {
     return {
       buttonLoading: true,
       icons: [],
+      checkCheckBox: false,
     };
   },
   mounted() {

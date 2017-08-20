@@ -1,7 +1,7 @@
 <template>
   <div class="ms-CheckBox">
-    <input type="checkbox" class="ms-CheckBox-input">
-    <label role="checkbox" class="ms-CheckBox-field" :class="{ 'is-disabled': disabled}" @click="command ? command($event) : null">
+    <input type="checkbox" class="ms-CheckBox-input" @change="handleChange">
+    <label role="checkbox" class="ms-CheckBox-field" :class="{ 'is-disabled': disabled}">
       <span class="ms-Label"><slot ></slot></span>
     </label>
   </div>
@@ -14,6 +14,10 @@
   export default {
     name: 'vui-checkbox',
     props: {
+      value: {
+        type: Boolean,
+        default: false,
+      },
       command: {
         type: Function,
         default: null,
@@ -26,6 +30,11 @@
     mounted() {
       // fabric API to create the Checkbox
       this.$checkbox = new fabric.CheckBox(this.$el);
+    },
+    methods: {
+      handleChange() {
+        this.$emit('input', this.$checkbox.getValue());
+      },
     },
   };
 </script>
