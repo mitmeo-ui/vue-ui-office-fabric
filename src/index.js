@@ -9,6 +9,7 @@ import MenuBarSide from '@/components/MenuBarSide';
 import MenuBarItem from '@/components/MenuBarItem';
 import MenuBarSubItem from '@/components/MenuBarSubItem';
 import Button from '@/components/Button';
+import CheckBox from '@/components/CheckBox';
 
 import '@/styles.scss';
 
@@ -23,6 +24,7 @@ export default {
     vue.component(MenuBarItem.name, MenuBarItem);
     vue.component(MenuBarSubItem.name, MenuBarSubItem);
     vue.component(Button.name, Button);
+    vue.component(CheckBox.name, CheckBox);
     vue.mixin({
       created() {
         const type = new UAParser().getDevice().type;
