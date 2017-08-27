@@ -14,14 +14,6 @@
   export default {
     name: 'vui-checkbox',
     props: {
-      value: {
-        type: Boolean,
-        default: false,
-      },
-      command: {
-        type: Function,
-        default: null,
-      },
       disabled: {
         type: Boolean,
         default: false,
